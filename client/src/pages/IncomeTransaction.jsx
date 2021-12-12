@@ -1,10 +1,9 @@
 import { useState, useEffect, useContext } from "react";
-import Navbar from "../components/Navbar";
-import { API } from "../config/api";
-import cssMod from "./IncomeTransaction.module.css";
-import { Container } from "react-bootstrap";
 import { UserContext } from "../context/userContext";
-import { Modal, Button } from "react-bootstrap";
+import { API } from "../config/api";
+import { Modal, Button, Container } from "react-bootstrap";
+import Navbar from "../components/Navbar";
+import cssMod from "./IncomeTransaction.module.css";
 
 export default function IncomeTransaction() {
   document.title = "Ways Food - Income Transaction";
@@ -69,40 +68,47 @@ export default function IncomeTransaction() {
     <>
       <Navbar />
       <Container className="px-xs-1 px-md-3 px-xl-5 mt-5 pb-5">
-        <h4 className={`${cssMod.title} mb-4`}>Income Transaction</h4>
+        <h1 className={`abhaya mb-5 pt-4`}>Income Transaction</h1>
         {trans.length > 0 ? (
-          <table className={cssMod.tableGroup}>
-            <thead style={{ textAlign: "center" }}>
-              <tr style={{ backgroundColor: "#E5E5E5" }}>
-                <th style={{ width: "75px" }}>No</th>
-                <th style={{ width: "200px" }}>Name</th>
-                <th>Address</th>
-                <th style={{ width: "250px" }}>Product Order</th>
-                <th style={{ width: "200px" }}>Status</th>
-                <th style={{ width: "200px" }}>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {trans.map((tr, index) => {
-                const tmpAddr = JSON.parse(tr.address);
-                const tmpDeliveryAddress = JSON.parse(tmpAddr.deliveryAddress);
-                const address = `${tmpDeliveryAddress.name}, ${tmpDeliveryAddress.address}`;
-                return (
-                  <TransList
-                    id={tr.id}
-                    // action={setTransaction}
-                    action={() => setDialog({ show: true })}
-                    key={index}
-                    index={index + 1}
-                    fullName={tr.userOrder}
-                    address={address}
-                    orders={tr.order}
-                    status={tr.status}
-                  />
-                );
-              })}
-            </tbody>
-          </table>
+          <div style={{ overflowX: "scroll" }}>
+            <table
+              className={`${cssMod.tableGroup} inter`}
+              style={{ maxWidth: "100%" }}
+            >
+              <thead style={{ textAlign: "center" }}>
+                <tr style={{ backgroundColor: "#E5E5E5" }}>
+                  <th style={{ width: "75px" }}>No</th>
+                  <th style={{ width: "200px" }}>Name</th>
+                  <th>Address</th>
+                  <th style={{ width: "169px" }}>Product Order</th>
+                  <th style={{ width: "160px" }}>Status</th>
+                  <th style={{ width: "200px" }}>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {trans.map((tr, index) => {
+                  const tmpAddr = JSON.parse(tr.address);
+                  const tmpDeliveryAddress = JSON.parse(
+                    tmpAddr.deliveryAddress
+                  );
+                  const address = `${tmpDeliveryAddress.name}, ${tmpDeliveryAddress.address}`;
+                  return (
+                    <TransList
+                      id={tr.id}
+                      // action={setTransaction}
+                      action={() => setDialog({ show: true })}
+                      key={index}
+                      index={index + 1}
+                      fullName={tr.userOrder}
+                      address={address}
+                      orders={tr.order}
+                      status={tr.status}
+                    />
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         ) : (
           "ga ada"
         )}
@@ -174,18 +180,53 @@ const TransList = (props) => {
   return (
     <tr style={{ backgroundColor: "white" }}>
       <td>{props.index}</td>
-      <td>{props.fullName}</td>
-      <td>{props.address}</td>
-      <td>
-        {props.orders.map((order) => {
-          return (
-            <div>
-              {order.qty}x {order.title}
-            </div>
-          );
-        })}
+      <td
+        style={{
+          whiteSpace: "nowrap",
+          width: "183px",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          textTransform: "capitalize",
+        }}
+      >
+        {props.fullName}
       </td>
-      <td className={textStyle} style={{ textAlign: "center" }}>
+      <td>
+        <div
+          style={{
+            whiteSpace: "nowrap",
+            width: "280px",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            textTransform: "capitalize",
+          }}
+        >
+          {props.address}
+        </div>
+      </td>
+      <td>
+        <div
+          style={{
+            whiteSpace: "nowrap",
+            width: "169px",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            textTransform: "capitalize",
+          }}
+        >
+          {props.orders.map((order, i) => {
+            let product = order.title;
+            if (i > 0 && i < props.orders.length) {
+              return ", " + product;
+            }
+            return product;
+          })}
+        </div>
+      </td>
+      <td
+        className={`${textStyle} avenir`}
+        style={{ textAlign: "center", minWidth: "160px" }}
+      >
         {props.status}
       </td>
       <td>

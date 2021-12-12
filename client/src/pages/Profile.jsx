@@ -79,7 +79,11 @@ function Profile() {
             </div>
           </Col>
           <Col md={5} xl={4}>
-            <h4 className="subtitle mb-4">History Transaction</h4>
+            <h4 className="subtitle mb-4">
+              {state.user.role === "user"
+                ? "History Transaction"
+                : "History Order"}
+            </h4>
             {trx?.length > 0
               ? trx.map((tr, index) => (
                   <Transaction
@@ -112,7 +116,7 @@ function Transaction(props) {
   return (
     <Row className={`${cssMod.trxGroup} my-3`}>
       <Col xs={8} md={6} lg={7} className="d-flex flex-column">
-        <div className={cssMod.trxName}>{props.name}</div>
+        <div className={`${cssMod.trxName} abhaya`}>{props.name}</div>
         <div>
           <span className={cssMod.trxDay}>{props.date.day}, </span>{" "}
           {props.date.date}

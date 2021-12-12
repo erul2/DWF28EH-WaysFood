@@ -1,11 +1,5 @@
-.title {
-  font-family: "Abhaya Libre", serif;
-  font-size: 2.2rem;
-}
-
 .tableGroup {
   width: 100%;
-  font-family: "Inter", sans-serif;
 }
 
 .tableGroup thead,
@@ -26,12 +20,16 @@
 .tdProduct {
   width: 100px;
 }
+
 .tdProduct th {
-  font-size: 1.2rem;
+  /* font-size: 1.2rem; */
+  font-size: 14px;
 }
+
 .tdProduct td {
   background-color: white;
-  font-size: 1.1rem;
+  /* font-size: 1.1rem; */
+  font-size: 14px;
 }
 
 .btnGroup {
@@ -41,9 +39,9 @@
 }
 
 .btnCancel {
-  padding: 0.2rem 1.5rem;
+  padding: 0.1rem 1.5rem;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   margin: 0 0.5rem;
   background: #ff0742;
   color: white;
@@ -52,9 +50,9 @@
 }
 
 .btnApprove {
-  padding: 0.2rem 1.5rem;
+  padding: 0.1rem 1.5rem;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   margin: 0 0.5rem;
   background: #0acf83;
   color: white;

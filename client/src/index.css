@@ -45,7 +45,7 @@ body {
 }
 
 .textSuccess {
-  color: var(--success);
+  color: var(--textSuccess);
 }
 
 .marker {
@@ -60,3 +60,25 @@ font-family: 'Nunito Sans', sans-serif;
 font-family: 'Inter', sans-serif;
 
 */
+
+.abhaya {
+  font-family: "Abhaya Libre", serif;
+}
+
+.barlow {
+  font-family: "Barlow Condensed", sans-serif;
+}
+
+/* product sans alternate */
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+}
+
+/* avenir alternate */
+.nunito {
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.inter {
+  font-family: "Inter", sans-serif;
+}
