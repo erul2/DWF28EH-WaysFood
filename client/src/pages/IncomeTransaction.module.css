@@ -1,0 +1,67 @@
+.title {
+  font-family: "Abhaya Libre", serif;
+  font-size: 2.2rem;
+}
+
+.tableGroup {
+  width: 100%;
+  font-family: "Inter", sans-serif;
+}
+
+.tableGroup thead,
+.tableGroup th,
+.tableGroup td {
+  border: 1px solid #828282;
+  padding: 0.5rem 1rem;
+}
+
+.product {
+  white-space: nowrap;
+  width: 200px;
+  height: 1.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tdProduct {
+  width: 100px;
+}
+.tdProduct th {
+  font-size: 1.2rem;
+}
+.tdProduct td {
+  background-color: white;
+  font-size: 1.1rem;
+}
+
+.btnGroup {
+  width: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.btnCancel {
+  padding: 0.2rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  margin: 0 0.5rem;
+  background: #ff0742;
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.btnApprove {
+  padding: 0.2rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  margin: 0 0.5rem;
+  background: #0acf83;
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.btnIcon {
+  text-align: center;
+}

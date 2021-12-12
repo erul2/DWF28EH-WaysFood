@@ -1,0 +1,30 @@
+.subtitle {
+  font-family: "Abhaya Libre", serif;
+  font-size: 2.2rem;
+}
+
+.mbtn {
+  height: 30px;
+  color: var(--white);
+  background-color: var(--primary);
+  border-radius: 5px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  padding: 0.2rem 0;
+}
+
+.mbtn:hover {
+  color: var(--secondary);
+  background-color: black;
+}
+
+.modal-90w {
+  width: 95% !important;
+  max-width: none !important;
+  position: fixed !important;
+  bottom: 1vh !important;
+  left: 50% !important;
+  transform: translate(-50%) !important;
+}

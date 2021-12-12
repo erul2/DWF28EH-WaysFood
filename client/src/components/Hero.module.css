@@ -1,0 +1,19 @@
+.hero {
+  background: var(--secondary);
+}
+
+.title {
+  font-family: "Abhaya Libre", serif;
+  font-size: 3.5rem;
+  color: var(--primary);
+}
+
+.summary {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+}
+
+.line {
+  margin-top: 1rem;
+  border-top: 3px solid var(--primary) !important;
+}

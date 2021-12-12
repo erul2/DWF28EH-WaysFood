@@ -1,0 +1,56 @@
+.description {
+  font-size: 1.3rem;
+  font-weight: normal;
+  margin: 1rem 0;
+}
+
+.btn {
+  background: var(--primary);
+  height: 100%;
+  border-radius: 5px;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnOrder {
+  width: 80%;
+  margin-left: auto;
+  margin-top: 5rem;
+  background: var(--primary);
+  border-radius: 5px;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.btn:hover,
+.btnOrder:hover {
+  cursor: pointer;
+}
+
+.divider {
+  border-top: 2px solid var(--primary);
+}
+.dividerGroup {
+  height: 1rem;
+}
+.table {
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.1rem;
+}
+
+.right {
+  text-align: right;
+  color: red;
+  padding: 0.1rem 0;
+}
+
+.qty {
+  text-align: right;
+  color: var(--primary);
+}

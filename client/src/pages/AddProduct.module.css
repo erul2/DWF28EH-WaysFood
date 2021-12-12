@@ -1,0 +1,34 @@
+.input {
+  width: 100%;
+  height: 3rem;
+  background-color: #d2d2d23a;
+  border: 2px solid #766c6c;
+  color: #1f1f1f;
+  border-radius: 5px;
+  padding: 0.3rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.btn {
+  height: 2.5rem !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.mapbtn {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 3rem !important;
+  border-radius: 5px;
+  background: var(--primary);
+}
+
+.mapbtn img {
+  margin-left: 0.5rem;
+}

@@ -1,0 +1,43 @@
+.navbar {
+  background: var(--secondary);
+}
+
+.navBrand {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.navBrand:hover {
+  color: var(--primary);
+}
+
+.navBtn {
+  width: 100px;
+  height: 30px;
+  color: var(--white);
+  background-color: var(--primary);
+  border-radius: 5px;
+  margin-left: 1rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+}
+.navBtn:hover {
+  color: var(--secondary);
+  background-color: black;
+}
+
+.dropdownItem {
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: "Montserrat", sans-serif;
+  margin-left: 0.5rem;
+}
+
+.badge {
+  font-family: "Nunito Sans", sans-serif;
+  top: 0.7rem;
+}

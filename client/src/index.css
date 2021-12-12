@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@800&family=Barlow+Condensed:ital,wght@1,500;1,600&family=Inter&family=Montserrat:wght@400;600&family=Nunito+Sans:wght@700&display=swap");
+
+:root {
+  --secondary: #ffc700;
+  --white: #ffffff;
+  --primary: #433434;
+  --bgsuccess: #00ff4817;
+  --success: #00ff47;
+  --textWarning: #ff9900;
+  --textSuccess: #78a85a;
+  --textDanger: #e83939;
+  --textInfo: #00d1ff;
+}
+
+body {
+  background-color: #efefef !important;
+}
+
+.statusOrderSuccess {
+  color: var(--success);
+  background: var(--bgsuccess);
+}
+
+.statusOrderCancle {
+  color: var(--textDanger);
+  background: var(--bgsuccess);
+}
+
+.statusWaitingApprove {
+  color: var(--textWarning);
+  background: var(--bgsuccess);
+}
+
+.statusOnTheWay {
+  color: var(--textInfo);
+  background: var(--bgsuccess);
+}
+
+.textWarning {
+  color: var(--textWarning);
+}
+
+.textInfo {
+  color: var(--textInfo);
+}
+
+.textSuccess {
+  color: var(--success);
+}
+
+.marker {
+  padding-bottom: 1.5rem;
+}
+
+/*
+font-family: 'Abhaya Libre', serif;
+font-family: 'Barlow Condensed', sans-serif;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Nunito Sans', sans-serif;
+font-family: 'Inter', sans-serif;
+
+*/

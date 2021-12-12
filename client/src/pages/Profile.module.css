@@ -1,0 +1,64 @@
+.titleGroup {
+  margin-bottom: 1.1rem;
+  font-family: "Montserrat", sans-serif;
+}
+
+.title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #613d2b;
+  margin-bottom: 0.4rem;
+}
+
+.value {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.valueName {
+  font-weight: 600;
+  font-size: 1.2rem;
+  text-transform: capitalize;
+}
+
+.trxGroup {
+  background-color: white;
+  padding: 1rem 0.5rem;
+  font-family: "Montserrat", sans-serif;
+  border-radius: 5px;
+}
+
+.trxName {
+  font-family: "Abhaya Libre", serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.trxDay {
+  font-weight: 900;
+  font-size: 1.1rem;
+}
+
+.trxTotal {
+  color: #974a4a;
+  font-weight: 900;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+.trxLogo {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.trxStatus {
+  margin-top: auto;
+  margin-left: auto;
+  width: 80%;
+  text-align: center;
+  font-weight: 600;
+  padding: 0.1rem 1rem;
+  border-radius: 5px;
+}
