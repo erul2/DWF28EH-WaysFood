@@ -10,6 +10,7 @@ import { UserContext } from "../context/userContext";
 import { CartContext } from "../context/cartContext";
 import Navbar from "../components/Navbar";
 import { Container, Row, Col, Modal, FormControl } from "react-bootstrap";
+import userNotif from "../notif/userNotif";
 
 function CartOrder() {
   document.title = "WaysFood - Cart Order";
@@ -25,6 +26,7 @@ function CartOrder() {
   const [subtotal, setSubtotal] = useState(null);
   const [totalQty, setTotalQty] = useState(null);
   const [shippingCost, setShippingCost] = useState(null);
+  const { sendNotif } = userNotif(cart?.id);
 
   const addSub = (id, type) => {
     if (cart.status) {
@@ -107,6 +109,10 @@ function CartOrder() {
         status: data.status,
       },
     });
+
+    sendNotif({
+      id: data.id,
+    });
   };
 
   const handleFinishOrder = async () => {
@@ -127,6 +133,9 @@ function CartOrder() {
         type: "CLEAR_CART",
       });
 
+      sendNotif({
+        id: cart.id,
+      });
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -250,7 +259,11 @@ function CartOrder() {
               </Row>
             </>
           ) : (
-            "kosong"
+            <div className="d-flex justify-content-center align-items-center mt-5 pt-5">
+              <h2 className="mt-5">
+                Let's order delicious food at the best restaurant
+              </h2>
+            </div>
           )}
         </Container>
         <Modal

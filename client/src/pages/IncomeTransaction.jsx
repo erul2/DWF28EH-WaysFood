@@ -4,6 +4,7 @@ import { API } from "../config/api";
 import { Modal, Button, Container } from "react-bootstrap";
 import Navbar from "../components/Navbar";
 import cssMod from "./IncomeTransaction.module.css";
+import adminNotif from "../notif/adminNotif";
 
 export default function IncomeTransaction() {
   document.title = "Ways Food - Income Transaction";
@@ -13,6 +14,9 @@ export default function IncomeTransaction() {
   const [dialog, setDialog] = useState({
     show: false,
   });
+  const roomId = "adminNotif";
+  const { notif, sendNotif } = adminNotif(roomId);
+  const [newNotif, setNewNotif] = useState();
 
   // get transactions data
   const getTransactions = async () => {
@@ -35,6 +39,7 @@ export default function IncomeTransaction() {
       } else if (action === "DELETE") {
         //action delete order
         await API.delete(`/transaction/${id}`);
+        sendNotif({ id });
         return getTransactions();
       }
 
@@ -54,11 +59,18 @@ export default function IncomeTransaction() {
 
       await API.put(`/transaction/${id}`, body, config);
 
+      sendNotif({ id, action });
       getTransactions();
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    getTransactions();
+    console.log("get trx with notif");
+    console.log(notif);
+  }, [notif]);
 
   useEffect(() => {
     getTransactions();

@@ -30,17 +30,9 @@ function App() {
       setAuthToken(localStorage.token);
     }
     if (localStorage.cart) {
-      API.get();
-      const { status, seller, orders, id } = JSON.parse(localStorage.cart);
-      cartDispatch({
-        type: "RELOAD_ORDER",
-        payload: {
-          status,
-          id,
-          seller,
-          orders,
-        },
-      });
+      const { id } = JSON.parse(localStorage.cart);
+
+      if (id) getTransactions(id);
     }
   }, [state]);
 
@@ -69,6 +61,34 @@ function App() {
       });
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const getTransactions = async (id) => {
+    try {
+      const response = await API.get(`/transaction/${id}`);
+      const data = response.data.data.transactions;
+
+      if (data.status === "Cancel") {
+        cartDispatch({
+          type: "CLEAR_CART",
+        });
+      }
+
+      cartDispatch({
+        type: "RELOAD_ORDER",
+        payload: {
+          status: data.status,
+          id: data.id,
+          seller: data.seller,
+          orders: data.order,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      cartDispatch({
+        type: "CLEAR_CART",
+      });
     }
   };
 

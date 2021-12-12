@@ -81,6 +81,11 @@ exports.getDetailTransaction = async (req, res) => {
           attributes: ["id", "fullName", "email", "location"],
         },
         {
+          model: user,
+          as: "seller",
+          attributes: ["id", "fullName", "email", "location"],
+        },
+        {
           model: products,
           through: {
             model: orders,
@@ -99,6 +104,7 @@ exports.getDetailTransaction = async (req, res) => {
       total: transactionsData.total,
       address: transactionsData.address,
       userOrder: transactionsData.buyer,
+      seller: transactionsData.seller,
       status: transactionsData.status,
       order: transactionsData.products.map((order) => {
         const { id, title, price, image } = order;

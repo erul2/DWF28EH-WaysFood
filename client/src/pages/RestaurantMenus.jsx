@@ -93,9 +93,6 @@ function RestaurantMenus() {
   };
 
   useEffect(() => {
-    if (!state.isLogin) {
-      navigate("/login");
-    }
     getMenus();
   }, []);
 
