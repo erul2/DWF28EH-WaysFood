@@ -1,5 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { CartContext } from "../context/cartContext";
+import { UserContext } from "../context/userContext";
+import { useNavigate } from "react-router-dom";
 import { capitalCase } from "capital-case";
 import { API } from "../config/api";
 import { useParams } from "react-router-dom";
@@ -11,6 +13,9 @@ import cssMod from "./RestaurantMenus.module.css";
 
 function RestaurantMenus() {
   const [cart, cartDispatch] = useContext(CartContext);
+  const [state] = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   const pId = parseInt(useParams().id);
   document.title = `Ways Food - `;
@@ -88,6 +93,9 @@ function RestaurantMenus() {
   };
 
   useEffect(() => {
+    if (!state.isLogin) {
+      navigate("/login");
+    }
     getMenus();
   }, []);
 
@@ -98,13 +106,17 @@ function RestaurantMenus() {
         <h4 className={`${cssMod.title} mb-4`}>
           {capitalCase(resto.fullName)}
         </h4>
-        <div className="row row-cols-2 row-cols-lg-4 gx-3 gx-lg-4">
-          {menus.length == 0 ? (
-            <div className="d-flex mt-5 pt-5">
-              <h2>Sorry, Menus are not available</h2>
-            </div>
-          ) : (
-            menus.map((menu, index) => (
+        {menus.length == 0 ? (
+          <div className="d-flex justify-content-center mt-5">
+            <img
+              src="/img/menu-unavailable.jpg"
+              alt=""
+              style={{ width: "85%" }}
+            />
+          </div>
+        ) : (
+          <div className="row row-cols-2 row-cols-lg-4 gx-3 gx-lg-4">
+            {menus.map((menu, index) => (
               <Menu
                 key={index}
                 id={menu.id}
@@ -115,9 +127,9 @@ function RestaurantMenus() {
                   handleOrder(menu);
                 }}
               />
-            ))
-          )}
-        </div>
+            ))}
+          </div>
+        )}
       </Container>
     </>
   );

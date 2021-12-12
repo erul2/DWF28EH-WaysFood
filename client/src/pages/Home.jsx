@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
 import { UserContext } from "../context/userContext";
 import getDistance from "../getDistance";
 import { API } from "../config/api";

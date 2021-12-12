@@ -67,9 +67,10 @@ export default function IncomeTransaction() {
   return (
     <>
       <Navbar />
-      <Container className="px-xs-1 px-md-3 px-xl-5 mt-5 pb-5">
-        <h1 className={`abhaya mb-5 pt-4`}>Income Transaction</h1>
-        {trans.length > 0 ? (
+      {trans.length > 0 ? (
+        <Container className="px-xs-1 px-md-3 px-xl-5 mt-5 pb-5">
+          <h1 className={`abhaya mb-5 pt-4`}>Income Transaction</h1>
+
           <div style={{ overflowX: "scroll" }}>
             <table
               className={`${cssMod.tableGroup} inter`}
@@ -82,7 +83,9 @@ export default function IncomeTransaction() {
                   <th>Address</th>
                   <th style={{ width: "169px" }}>Product Order</th>
                   <th style={{ width: "160px" }}>Status</th>
-                  <th style={{ width: "200px" }}>Action</th>
+                  <th style={{ minWidth: "200px", maxWidth: "200px" }}>
+                    Action
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -94,9 +97,35 @@ export default function IncomeTransaction() {
                   const address = `${tmpDeliveryAddress.name}, ${tmpDeliveryAddress.address}`;
                   return (
                     <TransList
-                      id={tr.id}
-                      // action={setTransaction}
-                      action={() => setDialog({ show: true })}
+                      approve={() => {
+                        setDialog({
+                          show: true,
+                          title: "Approve",
+                          message:
+                            "This order cannot be canceled once you have approved!",
+                          action: () => setTransaction(tr.id, "APPROVE"),
+                        });
+                      }}
+                      cancel={() => {
+                        setDialog({
+                          show: true,
+                          title: "Cancel",
+                          message:
+                            "Are you sure you want to cancel this order? ",
+                          desc: "This action cannot be undone.",
+                          action: () => setTransaction(tr.id, "CANCEL"),
+                        });
+                      }}
+                      delete={() => {
+                        setDialog({
+                          show: true,
+                          title: "Delete",
+                          message:
+                            "Are you sure you want to delete this order? ",
+                          desc: "This action cannot be undone.",
+                          action: () => setTransaction(tr.id, "DELETE"),
+                        });
+                      }}
                       key={index}
                       index={index + 1}
                       fullName={tr.userOrder}
@@ -109,23 +138,46 @@ export default function IncomeTransaction() {
               </tbody>
             </table>
           </div>
-        ) : (
-          "ga ada"
-        )}
-      </Container>
+        </Container>
+      ) : (
+        <Container
+          className="d-flex justify-content-center align-items-center"
+          style={{ height: "50vh" }}
+        >
+          <h3 className="py-5">
+            There seems to be no transaction at this time
+          </h3>
+        </Container>
+      )}
       <Modal
         show={dialog.show}
         onHide={() => setDialog(false)}
         backdrop="static"
         keyboard={false}
+        centered
       >
-        <Modal.Body>"halo"</Modal.Body>
+        <Modal.Header>
+          <h4>{dialog?.title}</h4>
+        </Modal.Header>
+        <Modal.Body>
+          <p className="h5">{dialog?.message}</p>
+          <p className="h6">{dialog?.desc}</p>
+        </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setDialog(false)}>
+          <Button
+            variant="secondary"
+            onClick={() => setDialog({ show: false })}
+          >
             Close
           </Button>
-          <Button variant="primary" onClick={() => console.log("confirm")}>
-            Understood
+          <Button
+            variant="primary"
+            onClick={() => {
+              dialog.action();
+              setDialog({ show: false });
+            }}
+          >
+            Confirm
           </Button>
         </Modal.Footer>
       </Modal>
@@ -138,21 +190,10 @@ const TransList = (props) => {
 
   let button = (
     <>
-      <button
-        onClick={() => {
-          props.action(props.id, "CANCEL");
-        }}
-        className={cssMod.btnCancel}
-      >
+      <button onClick={props.cancel} className={cssMod.btnCancel}>
         Cancel
       </button>
-      <button
-        onClick={() => {
-          //props.action(props.id, "APPROVE");
-          props.action();
-        }}
-        className={cssMod.btnApprove}
-      >
+      <button onClick={props.approve} className={cssMod.btnApprove}>
         Approve
       </button>
     </>
@@ -166,15 +207,7 @@ const TransList = (props) => {
     button = <img src="/icon/success.svg" alt="" />;
   } else if (props.status === "Cancel") {
     textStyle = "textWarning";
-    button = (
-      <img
-        onClick={() => {
-          props.action(props.id, "DELETE");
-        }}
-        src="/icon/cancel.svg"
-        alt=""
-      />
-    );
+    button = <img onClick={props.delete} src="/icon/cancel.svg" alt="" />;
   }
 
   return (
@@ -229,7 +262,7 @@ const TransList = (props) => {
       >
         {props.status}
       </td>
-      <td>
+      <td style={{ width: "169px" }}>
         <div className={cssMod.btnGroup}>{button}</div>
       </td>
     </tr>

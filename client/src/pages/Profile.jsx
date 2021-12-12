@@ -3,7 +3,6 @@ import { convert as rupiah } from "rupiah-format";
 import { UserContext } from "../context/userContext";
 import Navbar from "../components/Navbar";
 import { API } from "../config/api";
-
 import { Link } from "react-router-dom";
 import { Container, Col, Row } from "react-bootstrap";
 import cssMod from "./Profile.module.css";
@@ -25,8 +24,6 @@ function Profile() {
       const response = await API.get(uri);
 
       setTrx(response.data.data.transactions);
-
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -84,17 +81,19 @@ function Profile() {
                 ? "History Transaction"
                 : "History Order"}
             </h4>
-            {trx?.length > 0
-              ? trx.map((tr, index) => (
-                  <Transaction
-                    key={index}
-                    name={tr.resto ? tr.resto : tr.userOrder}
-                    date={tr.date}
-                    total={rupiah(tr.total)}
-                    status={tr.status}
-                  />
-                ))
-              : "kosong"}
+            {trx?.length > 0 ? (
+              trx.map((tr, index) => (
+                <Transaction
+                  key={index}
+                  name={tr.resto ? tr.resto : tr.userOrder}
+                  date={tr.date}
+                  total={rupiah(tr.total)}
+                  status={tr.status}
+                />
+              ))
+            ) : (
+              <h4>No transaction yet</h4>
+            )}
           </Col>
         </Row>
       </Container>

@@ -94,6 +94,7 @@ function App() {
           )
         }
       />
+      <Route path="/login" element={<Home />} />
       <Route path="/partner" element={<IncomeTransaction />} />
       <Route path="/restaurant-menus/:id" element={<RestaurantMenus />} />
       <Route path="/cart-order" element={<CartOrder />} />
