@@ -68,8 +68,6 @@ export default function IncomeTransaction() {
 
   useEffect(() => {
     getTransactions();
-    console.log("get trx with notif");
-    console.log(notif);
   }, [notif]);
 
   useEffect(() => {

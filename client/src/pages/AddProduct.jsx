@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API } from "../config/api";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Modal } from "react-bootstrap";
 import cssMod from "./AddProduct.module.css";
 import Navbar from "../components/Navbar";
 
 function AddProduct() {
   document.title = "Add Product";
   const navigate = useNavigate();
+  const [preview, setPreview] = useState(null);
+  const [showPreview, setShowPreview] = useState(false);
   const [form, setForm] = useState({
     title: "",
     price: "",
@@ -40,6 +42,11 @@ function AddProduct() {
       [e.target.name]:
         e.target.type === "file" ? e.target.files : e.target.value,
     });
+
+    if (e.target.type === "file") {
+      let url = URL.createObjectURL(e.target.files[0]);
+      setPreview(url);
+    }
   };
 
   return (
@@ -60,19 +67,36 @@ function AddProduct() {
               />
             </Col>
             <Col xs={5} lg={3} xl={2}>
-              <label
-                htmlFor="inputfile"
-                className={`${cssMod.input} d-flex justify-content-between`}
-              >
-                <div>Attach Image</div> <img src="/icon/attach.svg" />
-              </label>
-              <input
-                id="inputfile"
-                type="file"
-                name="image"
-                onChange={handleOnChange}
-                hidden
-              />
+              <div className="d-flex">
+                {preview && (
+                  <div className="d-flex me-3">
+                    <img
+                      src={preview}
+                      style={{
+                        maxWidth: "45px",
+                        maxHeight: "45px",
+                        objectFit: "cover",
+                      }}
+                      alt="preview"
+                      onClick={() => setShowPreview(true)}
+                    />
+                  </div>
+                )}
+                <label
+                  htmlFor="inputfile"
+                  className={`${cssMod.input} d-flex justify-content-between`}
+                >
+                  <div>{preview ? "Change" : "Attach Image"}</div>{" "}
+                  <img src="/icon/attach.svg" />
+                </label>
+                <input
+                  id="inputfile"
+                  type="file"
+                  name="image"
+                  onChange={handleOnChange}
+                  hidden
+                />
+              </div>
             </Col>
             <Col xs={12}>
               <input
@@ -91,6 +115,16 @@ function AddProduct() {
           </Row>
         </form>
       </Container>
+      <Modal
+        id="modalPreview"
+        show={showPreview}
+        onHide={() => setShowPreview(false)}
+        centered
+      >
+        <Modal.Body>
+          <img src={preview} alt="Preview" style={{ width: "100%" }} />
+        </Modal.Body>
+      </Modal>
     </>
   );
 }

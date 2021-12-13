@@ -11,6 +11,8 @@ function EditProfile() {
   document.title = "Edit Profile";
   const navigate = useNavigate();
   const [state, dispatch] = useContext(UserContext);
+  const [preview, setPreview] = useState(null);
+  const [showPreview, setShowPreview] = useState(false);
   const [form, setForm] = useState({
     fullName: "",
     email: "",
@@ -29,6 +31,7 @@ function EditProfile() {
 
       // get user data
       const data = response.data.data.user;
+      setPreview(data.image);
       setForm({
         ...form,
         fullName: data.fullName,
@@ -65,6 +68,11 @@ function EditProfile() {
       [e.target.name]:
         e.target.type === "file" ? e.target.files : e.target.value,
     });
+
+    if (e.target.type === "file") {
+      let url = URL.createObjectURL(e.target.files[0]);
+      setPreview(url);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -123,19 +131,36 @@ function EditProfile() {
               />
             </Col>
             <Col xs={5} lg={3} xl={2}>
-              <label
-                htmlFor="inputfile"
-                className={`${cssMod.input} d-flex justify-content-between`}
-              >
-                <div>Attach Image</div> <img src="/icon/attach.svg" />
-              </label>
-              <input
-                id="inputfile"
-                type="file"
-                name="image"
-                onChange={handleChange}
-                hidden
-              />
+              <div className="d-flex">
+                {preview && (
+                  <div className="d-flex me-3">
+                    <img
+                      src={preview}
+                      style={{
+                        maxWidth: "45px",
+                        maxHeight: "45px",
+                        objectFit: "cover",
+                      }}
+                      alt="preview"
+                      onClick={() => setShowPreview(true)}
+                    />
+                  </div>
+                )}
+                <label
+                  htmlFor="inputfile"
+                  className={`${cssMod.input} d-flex justify-content-between`}
+                >
+                  <div>{preview ? "Change" : "Attach Image"}</div>{" "}
+                  <img src="/icon/attach.svg" alt="" />
+                </label>
+                <input
+                  id="inputfile"
+                  type="file"
+                  name="image"
+                  onChange={handleChange}
+                  hidden
+                />
+              </div>
             </Col>
             <Col xs={12}>
               <input
@@ -167,7 +192,7 @@ function EditProfile() {
                   className={`mbtn ${cssMod.mapbtn}`}
                   onClick={handleMapShow}
                 >
-                  Select On Map <img src="/icon/map.svg" />
+                  Select On Map <img src="/icon/map.svg" alt="" />
                 </div>
               </div>
             </Col>
@@ -178,6 +203,17 @@ function EditProfile() {
             </Col>
           </Row>
         </form>
+        <Modal
+          id="modalPreview"
+          show={showPreview}
+          onHide={() => setShowPreview(false)}
+          centered
+        >
+          <Modal.Body>
+            <img src={preview} alt="Preview" style={{ width: "100%" }} />
+          </Modal.Body>
+        </Modal>
+
         <Modal
           id="main-modal"
           dialogClassName="modal-90w"

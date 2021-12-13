@@ -32,7 +32,6 @@ function App() {
       if (id) {
         getTransactions(id);
       } else {
-        console.log("ambil dari lokal");
         const { seller, orders } = JSON.parse(localStorage.cart);
         cartDispatch({
           type: "RELOAD_ORDER",
@@ -48,7 +47,6 @@ function App() {
   }, [state]);
 
   const checkUser = async () => {
-    console.log("check user");
     if (!localStorage.token) {
       return null;
     }

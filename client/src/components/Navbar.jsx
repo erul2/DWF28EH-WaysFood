@@ -12,8 +12,6 @@ function AfterLogin(props) {
   const [state, dispatch] = useContext(UserContext);
   const [cart, cartDispatch] = useContext(CartContext);
   const navigate = useNavigate();
-  console.log("nav");
-  console.log(props.state);
   const [totalCart, setTotalCart] = useState(0);
 
   useEffect(() => {
