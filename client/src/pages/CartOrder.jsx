@@ -20,7 +20,6 @@ function CartOrder() {
   const [cart, cartDispatch] = useContext(CartContext);
   const [state, dispatch] = useContext(UserContext);
   const [location, setLocation] = useState(null);
-
   const [mapShow, setMapShow] = useState(false);
   const [mapType, setMapType] = useState("DELIVERY_LOCATION");
   const [subtotal, setSubtotal] = useState(null);
@@ -159,9 +158,7 @@ function CartOrder() {
         <Container className="mt-5 pb-5">
           {cart.orders.length > 0 ? (
             <>
-              <h4 className="subtitle mb-4">
-                {capitalCase(cart.seller.fullName)}
-              </h4>
+              <h4 className="subtitle mb-4">{cart.seller.fullName}</h4>
               <h6 className={cssMod.description}>Delivery Location</h6>
               <Row>
                 <Col xs={8} md={9} xl={10}>

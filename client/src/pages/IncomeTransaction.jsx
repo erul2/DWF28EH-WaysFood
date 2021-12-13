@@ -39,8 +39,9 @@ export default function IncomeTransaction() {
       } else if (action === "DELETE") {
         //action delete order
         await API.delete(`/transaction/${id}`);
-        sendNotif({ id });
-        return getTransactions();
+
+        getTransactions();
+        return sendNotif({ id });
       }
 
       // configuration

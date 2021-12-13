@@ -1,12 +1,10 @@
 import { useState, useEffect, useContext } from "react";
 import { CartContext } from "../context/cartContext";
 import { UserContext } from "../context/userContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { capitalCase } from "capital-case";
 import { API } from "../config/api";
-import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
-
 import { Container } from "react-bootstrap";
 import Menu from "../components/Menu";
 import cssMod from "./RestaurantMenus.module.css";
@@ -14,12 +12,8 @@ import cssMod from "./RestaurantMenus.module.css";
 function RestaurantMenus() {
   const [cart, cartDispatch] = useContext(CartContext);
   const [state] = useContext(UserContext);
-
-  const navigate = useNavigate();
-
   const pId = parseInt(useParams().id);
   document.title = `Ways Food - `;
-
   const [resto, setResto] = useState({ fullName: "WaysFood" });
   const [menus, setMenus] = useState([]);
 

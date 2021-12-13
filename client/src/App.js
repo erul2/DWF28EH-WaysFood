@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { API, setAuthToken } from "./config/api";
 import { UserContext } from "./context/userContext";
 import { CartContext } from "./context/cartContext";
@@ -31,7 +31,6 @@ function App() {
     }
     if (localStorage.cart) {
       const { id } = JSON.parse(localStorage.cart);
-
       if (id) getTransactions(id);
     }
   }, [state]);
@@ -45,12 +44,6 @@ function App() {
     try {
       const response = await API.get("/check-auth");
 
-      if (response.status === 404) {
-        return dispatch({
-          type: "AUTH_ERROR",
-        });
-      }
-
       let payload = response.data.data.user;
       payload.token = localStorage.token;
 
@@ -61,6 +54,9 @@ function App() {
       });
     } catch (error) {
       console.log(error);
+      return dispatch({
+        type: "AUTH_ERROR",
+      });
     }
   };
 
@@ -125,9 +121,16 @@ function App() {
       <Route
         path="*"
         element={
-          <main style={{ padding: "1rem" }}>
-            <p>404 Page Not Pound!</p>
-          </main>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              width: "100%",
+              height: "100vh",
+            }}
+          >
+            <h1 style={{ margin: " 0 auto" }}>404 Page Not Pound!</h1>
+          </div>
         }
       />
     </Routes>

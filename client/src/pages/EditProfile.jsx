@@ -179,7 +179,7 @@ function EditProfile() {
                   type="text"
                   placeholder="Location"
                   name="location"
-                  value={form.location.name}
+                  value={form.location?.name}
                   disabled
                   className={`${cssMod.input} me-4`}
                 />
