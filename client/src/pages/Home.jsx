@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
 import { UserContext } from "../context/userContext";
 import getDistance from "../getDistance";
 import { API } from "../config/api";
@@ -12,12 +11,12 @@ import { Container } from "react-bootstrap";
 import cssMod from "./Home.module.css";
 
 function Home() {
+  document.title = "Ways Food";
   const [state, dispatch] = useContext(UserContext);
   const start =
     state.isLogin && state.user?.location
       ? JSON.parse(state.user.location).point
       : null;
-  document.title = "Ways Food";
   const [resto, setResto] = useState({ pop: null, near: null });
 
   // get resto data
@@ -71,7 +70,7 @@ function Home() {
                             { lat: start[1], long: start[0] },
                             { lat: end[1], long: end[0] }
                           )
-                        : 0
+                        : "< 1"
                     }
                   />
                 );

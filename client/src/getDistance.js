@@ -20,8 +20,4 @@ export default function getDistance(start, end) {
 
     return dist.toFixed(1);
   }
-
-  function toRad(value) {
-    return (value * Math.PI) / 100;
-  }
 }

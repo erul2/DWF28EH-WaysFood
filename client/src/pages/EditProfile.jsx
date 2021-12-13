@@ -22,20 +22,13 @@ function EditProfile() {
   const [mapShow, setMapShow] = useState(false);
   const handleMapClose = () => setMapShow(false);
   const handleMapShow = () => setMapShow(true);
-  const [location, setLocation] = useState(null);
 
   const getUserData = async () => {
     try {
       const response = await API.get("/check-auth");
 
-      if (response.status === 404) {
-        return dispatch({
-          type: "AUTH_ERROR",
-        });
-      }
-
       // get user data
-      let data = response.data.data.user;
+      const data = response.data.data.user;
       setForm({
         ...form,
         fullName: data.fullName,
@@ -47,16 +40,10 @@ function EditProfile() {
       console.log(error);
     }
   };
+
   const checkUser = async () => {
-    console.log("check user");
     try {
       const response = await API.get("/check-auth");
-
-      if (response.status === 404) {
-        return dispatch({
-          type: "AUTH_ERROR",
-        });
-      }
 
       // get user data
       let payload = response.data.data.user;
@@ -112,13 +99,6 @@ function EditProfile() {
 
   useEffect(() => {
     getUserData();
-    // setForm({
-    //   ...form,
-    //   fullName: state.user.fullName,
-    //   email: state.user.email,
-    //   phone: state.user.phone,
-    //   location: state.user.location ? JSON.parse(state.user.location) : "",
-    // });
   }, []);
 
   return (

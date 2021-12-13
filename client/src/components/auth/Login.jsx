@@ -50,12 +50,6 @@ export default function Login(props) {
       }
 
       props.close();
-      console.log(response.data.data);
-      // if (response.data.data.user.role === "partner") {
-      //   navigate("/partner");
-      // } else {
-      //   navigate("/");
-      // }
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -92,12 +86,13 @@ export default function Login(props) {
           </button>
           <p className="mt-3 text-center text-muted">
             Don't have an account ? Click{" "}
-            <p
+            <a
+              href="#"
               className="fw-bold text-decoration-none link-secondary"
               onClick={props.switch}
             >
               Here
-            </p>
+            </a>
           </p>
         </Form>
       </Modal.Body>

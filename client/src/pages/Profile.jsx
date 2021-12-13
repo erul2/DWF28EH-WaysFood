@@ -14,7 +14,6 @@ function Profile() {
   document.title = state.user.role === "user" ? "Profile" : "Profile Partner";
 
   const getTrx = async () => {
-    console.log("ngambil data trx");
     try {
       const uri =
         state.user.role === "user"

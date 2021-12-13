@@ -5,7 +5,6 @@ import OrderList from "../components/OrderList";
 import { API } from "../config/api";
 import cssMod from "./CartOrder.module.css";
 import { convert as rupiah } from "rupiah-format";
-import { capitalCase } from "capital-case";
 import { UserContext } from "../context/userContext";
 import { CartContext } from "../context/cartContext";
 import Navbar from "../components/Navbar";
@@ -33,7 +32,6 @@ function CartOrder() {
     }
 
     let dataOrder = cart.orders;
-
     for (let i = 0; i < dataOrder.length; i++) {
       if (dataOrder[i].id === id) {
         switch (type) {
@@ -142,13 +140,11 @@ function CartOrder() {
   };
 
   useEffect(() => {
-    console.log(location);
     if (state.user.location && !location) {
       setLocation(JSON.parse(state.user.location));
     } else {
       setLocation("");
     }
-    console.log("effect dipanggil");
   }, [state.user.location]);
 
   return (

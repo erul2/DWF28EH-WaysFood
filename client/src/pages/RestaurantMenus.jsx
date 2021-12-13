@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { CartContext } from "../context/cartContext";
 import { UserContext } from "../context/userContext";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { capitalCase } from "capital-case";
 import { API } from "../config/api";
 import Navbar from "../components/Navbar";

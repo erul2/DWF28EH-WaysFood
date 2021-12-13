@@ -13,6 +13,7 @@ function AddProduct() {
     price: "",
     image: "",
   });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // configuration
@@ -21,6 +22,7 @@ function AddProduct() {
         "Content-Type": "multipart/form-data",
       },
     };
+
     // store to form data as object
     const formData = new FormData();
     formData.set("title", form.title);
@@ -28,9 +30,10 @@ function AddProduct() {
     formData.set("price", form.price);
 
     // send to API
-    const response = await API.post("/product", formData, config);
+    await API.post("/product", formData, config);
     navigate("/");
   };
+
   const handleOnChange = (e) => {
     setForm({
       ...form,
@@ -38,6 +41,7 @@ function AddProduct() {
         e.target.type === "file" ? e.target.files : e.target.value,
     });
   };
+
   return (
     <>
       <Navbar />

@@ -16,7 +16,6 @@ export default function IncomeTransaction() {
   });
   const roomId = "adminNotif";
   const { notif, sendNotif } = adminNotif(roomId);
-  const [newNotif, setNewNotif] = useState();
 
   // get transactions data
   const getTransactions = async () => {

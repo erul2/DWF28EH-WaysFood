@@ -3,10 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { API, setAuthToken } from "./config/api";
 import { UserContext } from "./context/userContext";
 import { CartContext } from "./context/cartContext";
-
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-
+import RequireAuth from "./components/auth/RequireAuth";
 import Home from "./pages/Home";
 import RestaurantMenus from "./pages/RestaurantMenus";
 import CartOrder from "./pages/CartOrder";
@@ -14,7 +11,8 @@ import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import AddProduct from "./pages/AddProduct";
 import IncomeTransaction from "./pages/IncomeTransaction";
-import MapsTest from "./pages/MapsTest";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 // init token on axios every time the app refreshed
 if (localStorage.token) {
@@ -31,7 +29,21 @@ function App() {
     }
     if (localStorage.cart) {
       const { id } = JSON.parse(localStorage.cart);
-      if (id) getTransactions(id);
+      if (id) {
+        getTransactions(id);
+      } else {
+        console.log("ambil dari lokal");
+        const { seller, orders } = JSON.parse(localStorage.cart);
+        cartDispatch({
+          type: "RELOAD_ORDER",
+          payload: {
+            status: null,
+            id: null,
+            seller,
+            orders,
+          },
+        });
+      }
     }
   }, [state]);
 
@@ -82,7 +94,7 @@ function App() {
       });
     } catch (error) {
       console.log(error);
-      cartDispatch({
+      return cartDispatch({
         type: "CLEAR_CART",
       });
     }
@@ -110,14 +122,54 @@ function App() {
           )
         }
       />
-      <Route path="/login" element={<Home />} />
-      <Route path="/partner" element={<IncomeTransaction />} />
-      <Route path="/restaurant-menus/:id" element={<RestaurantMenus />} />
-      <Route path="/cart-order" element={<CartOrder />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/edit-profile" element={<EditProfile />} />
-      <Route path="/add-product" element={<AddProduct />} />
-      <Route path="/maps-test" element={<MapsTest />} />
+      <Route
+        path="/partner"
+        element={
+          <RequireAuth>
+            <IncomeTransaction />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/restaurant-menus/:id"
+        element={
+          <RequireAuth>
+            <RestaurantMenus />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/cart-order"
+        element={
+          <RequireAuth>
+            <CartOrder />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <RequireAuth>
+            <Profile />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/edit-profile"
+        element={
+          <RequireAuth>
+            <EditProfile />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/add-product"
+        element={
+          <RequireAuth>
+            <AddProduct />
+          </RequireAuth>
+        }
+      />
       <Route
         path="*"
         element={
